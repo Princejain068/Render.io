@@ -6,10 +6,10 @@ const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3')
 
 // Making a s3 client with our credentials
 const s3Client = new S3Client({
-    region: '',
+    region: process.env.REGION,
     credentials: {
-        accessKeyId: '',
-        secretAccessKey: ''
+        accessKeyId: process.env.ACCESS_ID,
+        secretAccessKey: process.env.ACCESS_KEY
     }
 })
 // Project Id taking from envirorment Variable
