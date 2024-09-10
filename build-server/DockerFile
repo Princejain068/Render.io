@@ -1,0 +1,32 @@
+# Base Image
+FROM ubuntu:focal
+
+# For update all packages in Base Image
+RUN apt-get update
+
+# Installing Curl for api calls (CLI tool for api calls)
+RUN apt-get install -y curl
+
+# Installing nodejs
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
+RUN apt-get upgrade -y
+RUN apt-get install -y nodejs
+
+# Installing Git
+RUN apt-get install git -y
+
+# Setting Working Directory as app
+WORKDIR /home/app
+
+# Copy All scripts
+COPY main.sh main.sh
+COPY script.js script.js
+COPY package*.json .
+
+RUN npm install
+
+RUN chmod +x main.sh
+RUN chmod +x script.js
+
+# Main Entry point for my docker
+ENTRYPOINT [ "/home/app/main.sh" ]
